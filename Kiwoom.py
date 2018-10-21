@@ -1,10 +1,12 @@
+import sys
+from PyQt5.QtWidgets import *
 from PyQt5.QAxContainer import *
 from PyQt5.QtCore import *
+import time
+import pandas as pd
+import sqlite3
 
 TR_REQ_TIME_INTERVAL = 0.2
-
-comm_connect
-
 
 class Kiwoom(QAxWidget):
     # 생성자
@@ -95,26 +97,26 @@ class Kiwoom(QAxWidget):
             self.ohlcv['close'].append(int(close))
             self.ohlcv['volume'].append(int(volume))
 
-# if __name__ == "__main__":
-#    app = QApplication(sys.argv)
-#    kiwoom = Kiwoom()
-#    kiwoom.comm_connect()
-#    kiwoom.ohlcv = {'date': [], 'open': [], 'high': [], 'low': [], 'close': [], 'volume': []}
+if __name__ == "__main__":
+   app = QApplication(sys.argv)
+   kiwoom = Kiwoom()
+   kiwoom.comm_connect()
+   kiwoom.ohlcv = {'date': [], 'open': [], 'high': [], 'low': [], 'close': [], 'volume': []}
 
 # opt10081 TR 요청
-#    kiwoom.set_input_value("종목코드", "039490")
-#    kiwoom.set_input_value("기준일자", "20170224")
-#    kiwoom.set_input_value("수정주가구분", 1)
-#    kiwoom.comm_rq_data("opt10081_req", "opt10081", 0, "0101")
+   kiwoom.set_input_value("종목코드", "039490")
+   kiwoom.set_input_value("기준일자", "20170224")
+   kiwoom.set_input_value("수정주가구분", 1)
+   kiwoom.comm_rq_data("opt10081_req", "opt10081", 0, "0101")
 
-#    while kiwoom.remained_data == True:
-#        time.sleep(TR_REQ_TIME_INTERVAL)
-#        kiwoom.set_input_value("종목코드", "039490")
-#        kiwoom.set_input_value("기준일자", "20170224")
-#        kiwoom.set_input_value("수정주가구분", 1)
-#        kiwoom.comm_rq_data("opt10081_req", "opt10081", 2, "0101")
+   while kiwoom.remained_data == True:
+       time.sleep(TR_REQ_TIME_INTERVAL)
+       kiwoom.set_input_value("종목코드", "039490")
+       kiwoom.set_input_value("기준일자", "20170224")
+       kiwoom.set_input_value("수정주가구분", 1)
+       kiwoom.comm_rq_data("opt10081_req", "opt10081", 2, "0101")
 
-#    df = pd.DataFrame(kiwoom.ohlcv, columns=['open', 'high', 'low', 'close', 'volume'], index=kiwoom.ohlcv['date'])
+   df = pd.DataFrame(kiwoom.ohlcv, columns=['open', 'high', 'low', 'close', 'volume'], index=kiwoom.ohlcv['date'])
 
-#    con = sqlite3.connect("c:/Users/Jason/stock.db")
-#    df.to_sql('039490', con, if_exists='replace')
+   con = sqlite3.connect("C:/Users/DD/PycharmProjects/slipp-ml-test/stock.db")
+   df.to_sql('039490', con, if_exists='replace')

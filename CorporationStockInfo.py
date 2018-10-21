@@ -27,4 +27,4 @@ def get_stock_listed_corporation():
 dataframe = get_stock_listed_corporation()
 dataframe = dataframe.loc[:, ['회사명', '종목코드', '업종', '상장일', '결산월']]
 
-print(dataframe.head())
+#print(dataframe.head())

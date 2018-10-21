@@ -4,11 +4,12 @@ import pandas as pd
 
 import plotly.offline as offline
 import plotly.graph_objs as go
-from crawlingTest import get_stock_listed_corporation
+from CorporationStockInfo import get_stock_listed_corporation
 
 
 code_df = get_stock_listed_corporation()
-print(code_df.head())
+#print(code_df.head())
+print(code_df)
 
 def get_corporation_name(dataframe, column):
     return dataframe[column][0]

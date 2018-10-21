@@ -1,2 +1,4 @@
 .idea/
 venv/
+autorun.py
+__pycache__/

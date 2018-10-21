@@ -21,9 +21,8 @@ es_excepted_weekend.insert(len(es_excepted_weekend.columns), "MA20", moving_aver
 es_excepted_weekend.insert(len(es_excepted_weekend.columns), "MA60", moving_average_60)
 es_excepted_weekend.insert(len(es_excepted_weekend.columns), "MA120", moving_average_120)
 
-conn = sqlite3.connect("c:/Users/kimdonghoon/PycharmProjects/slipp-ml-test/test.db")
+conn = sqlite3.connect("C:/Users/DD/PycharmProjects/slipp-ml-test/test.db")
 
 cursor = conn.cursor()
-cursor.execute("CREATE TABLE test(Date text, High int, Low int, Open int, Close int, Volume int, Adj_Close int)")
-
-gs.to_sql('test', conn, flavor='sqlite', if_exists='replace')
+cursor.execute("CREATE TABLE IF NOT EXISTS test(Date text, High int, Low int, Open int, Close int, Volume int, Adj_Close int)")
+gs.to_sql('test', conn, if_exists='replace')

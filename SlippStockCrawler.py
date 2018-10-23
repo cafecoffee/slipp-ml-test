@@ -7,7 +7,8 @@ import pandas as pd
 import pandas_datareader.data as web
 import requests
 from pandas_datareader._utils import RemoteDataError
-
+import pickle
+import gzip
 
 class SlippStockCrawler:
     def __init__(self):
@@ -44,7 +45,9 @@ class SlippStockCrawler:
         codes = ['000400', '051500']
         num = len(codes)
 
-        con = self.get_sqlite_connection()
+        # con = self.get_sqlite_connection()
+
+        stockData = {}
 
         for i, code in enumerate(codes):
             try:
@@ -55,9 +58,25 @@ class SlippStockCrawler:
                 self.append_moving_average(df, 60)
                 self.append_moving_average(df, 120)
                 print(df)
-                df.to_sql(code, con, if_exists='replace')
+                # df.to_sql(code, con, if_exists='replace')
+                stockData[code] = df
+
             except RemoteDataError as err:
                 print(err)
+
+        self.save_stock_data(stockData)
+
+    @staticmethod
+    def save_stock_data(data):
+        with gzip.open('testPickleFile.pickle', 'wb') as f:
+            pickle.dump(data, f)
+
+    @staticmethod
+    def view_pickle():
+        with gzip.open('testPickleFile.pickle', 'rb') as f:
+            data = pickle.load(f)
+            print("==================pickle=================")
+            print(data)
 
     @staticmethod
     def get_available_stock(code):
@@ -80,3 +99,4 @@ class SlippStockCrawler:
 if __name__ == "__main__":
     crawler = SlippStockCrawler()
     crawler.run()
+    crawler.view_pickle()

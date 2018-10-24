@@ -10,3 +10,7 @@
  - Pandas API를 통한 주식 정보 크롤링 (야후 주식)
 #### append_moving_average
  - 이동평균 연산
+
+Slipp Wiki
+https://www.slipp.net/wiki/pages/viewpage.action?pageId=30771038
+

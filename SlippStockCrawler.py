@@ -41,8 +41,8 @@ class SlippStockCrawler:
 
     def run(self):
 
-        # codes = self.get_stock_code_list()
-        codes = ['000400', '051500']
+        codes = self.get_stock_code_list()
+        #codes = ['000400', '051500']
         num = len(codes)
 
         # con = self.get_sqlite_connection()
